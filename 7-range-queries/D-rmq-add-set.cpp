@@ -147,8 +147,8 @@ class SegmentTree {
  public:
   // Complexity: O(n)
   explicit SegmentTree(const vector<ll> &arr)
-    : n(arr.size())
-    , x(compute_x(n))
+      : n(arr.size())
+      , x(compute_x(n))
   {
     t.resize(2 * x - 1, 0);
     upd_add.resize(2 * x - 1, 0);
@@ -200,7 +200,7 @@ class SegmentTreeNaive {
 
  public:
   explicit SegmentTreeNaive(const vector<ll> arr_)
-    : arr(arr_)
+      : arr(arr_)
   {
   }
 
@@ -233,14 +233,16 @@ class SegmentTreeNaive {
   }
 };
 
-void validate_state(SegmentTree &st, SegmentTreeNaive &stn) {
-  return;
+void validate_state(const SegmentTree &st, const SegmentTreeNaive &stn) {
+  SegmentTree st_ = st;
+  SegmentTreeNaive stn_ = stn;
   for (size_t i = 0; i < st.get_n(); i++) {
-    auto a_i = st.rmq(i, i);
-    auto a_i_naive = stn.rmq(i, i);
+    auto a_i = st_.rmq(i, i);
+    auto a_i_naive = stn_.rmq(i, i);
     assert(a_i == a_i_naive);
   }
 }
+
 
 void process_queries(istream &is, ostream &os, SegmentTree &st, SegmentTreeNaive &stn) {
   ll i, j, x;
